@@ -10,16 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_18_233613) do
+ActiveRecord::Schema.define(version: 2020_02_24_173551) do
 
   create_table "people", force: :cascade do |t|
     t.string "name"
     t.string "birth_year"
     t.string "homeworld"
-    t.integer "starships_id"
+    t.integer "planet_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["starships_id"], name: "index_people_on_starships_id"
+    t.index ["planet_id"], name: "index_people_on_planet_id"
   end
 
+  create_table "people_vehicles", id: false, force: :cascade do |t|
+    t.integer "person_id", null: false
+    t.integer "vehicle_id", null: false
+  end
+
+  create_table "planets", force: :cascade do |t|
+    t.string "name"
+    t.string "terrain"
+    t.string "climate"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "vehicles", force: :cascade do |t|
+    t.string "name"
+    t.string "model"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "people", "planets"
 end

@@ -4,7 +4,7 @@ class CreatePeople < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :birth_year
       t.string :homeworld
-      t.references :starships
+      t.references :planet, foreign_key: true
 
       t.timestamps
     end
