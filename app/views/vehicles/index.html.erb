@@ -17,6 +17,9 @@
       <tr>
         <td><%= vehicle.name %></td>
         <td><%= vehicle.model %></td>
+        <td> <% unless vehicle.people.first.nil? %>
+            <%= vehicle.people.first.name %>
+          <% end %></td>
         <td><%= link_to 'Show', vehicle %></td>
         <td><%= link_to 'Edit', edit_vehicle_path(vehicle) %></td>
         <td><%= link_to 'Destroy', vehicle, method: :delete, data: { confirm: 'Are you sure?' } %></td>

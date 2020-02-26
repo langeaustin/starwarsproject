@@ -12,7 +12,7 @@
 
 <p>
   <strong>Pilots:</strong>
-  <%= @vehicle.pilots_id %>
+  <%= @vehicle.people.first.name %>
 </p>
 
 <%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |

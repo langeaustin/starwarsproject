@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :beers
   resources :vehicles
   resources :planets
   resources :people

@@ -16,8 +16,15 @@
 </p>
 
 <p>
-  <strong>Starships:</strong>
-  <%= @person.starships %>
+  <strong>Vehicles:</strong>
+  <ul>
+  <% @person.vehicles.each do |vehicle| %>
+
+    <li>
+    <%= vehicle.name %>
+    </li>
+  <% end %>
+  </ul>
 </p>
 
 <%= link_to 'Edit', edit_person_path(@person) %> |

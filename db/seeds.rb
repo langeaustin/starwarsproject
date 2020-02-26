@@ -5,6 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
 require 'open-uri'
 require 'json'
 
@@ -16,7 +17,7 @@ end
 Person.destroy_all
 Planet.destroy_all
 Vehicle.destroy_all
-
+Beer.destroy_all
 # Builds a person
 def person_url(id)
   "https://swapi.co/api/people/#{id}"
@@ -44,23 +45,34 @@ count.each do |pagenumber|
 
   #  pp char_id
 
+  count = 37
+
+  count.times do
+    beer = Beer.create(Faker::Beer.brand.unique)
+  end
+
   char_id.each do |character|
     person = swapi_fetch(character['url'])
     homeworld = swapi_fetch(person['homeworld'])
     vehicles = person['vehicles'].map { |vehicles_url| swapi_fetch(vehicles_url) }
 
     unless homeworld.empty?
-    h = Planet.find_or_create_by(name: homeworld['name'], terrain: homeworld['terrain'], climate: homeworld['climate'])
+      h = Planet.find_or_create_by(name: homeworld['name'], terrain: homeworld['terrain'], climate: homeworld['climate'])
     end
 
     unless person.empty?
-    p = h.people.create(name: person['name'], birth_year: person['birth_year'], homeworld: homeworld['name'])
-    end
+      p = h.people.create(name: person['name'], birth_year: person['birth_year'], homeworld: homeworld['name'])
+      b = beer.rand
+      p.beer = b
 
-    unless vehicles.empty?
-      vehicles.map {|vehicle|
-        v = Vehicle.find_or_create_by(name: vehicle['name'], model: vehicle['model'])
-        p.vehicles << v}
+      unless vehicles.empty?
+        vehicles.each do |vehicle|
+          p.vehicles.find_or_create_by(name: vehicle['name'], model: vehicle['model'])
+        end
+        #
+        #   v = Vehicle.find_or_create_by(name: vehicle['name'], model: vehicle['model'])
+        #
+      end
     end
 
 
@@ -73,6 +85,3 @@ end
 puts Person.count
 
 puts Vehicle.count
-
-
-

@@ -19,7 +19,9 @@
         <td><%= person.name %></td>
         <td><%= person.birth_year %></td>
         <td><%= person.homeworld %></td>
-        <td><%=  %></td>
+        <td> <% unless person.vehicles.first.nil? %>
+        <%= person.vehicles.count %>
+       <% end %></td>
         <td><%= link_to 'Show', person %></td>
         <td><%= link_to 'Edit', edit_person_path(person) %></td>
         <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
