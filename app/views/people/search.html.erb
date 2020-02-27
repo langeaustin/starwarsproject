@@ -1,0 +1,34 @@
+ <p id="notice"><%= notice %></p>
+
+  <h5>People</h5>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th class="title is-4">Name</th>
+      <th class="title is-4">Birth year</th>
+      <th class="title is-4">Homeworld</th>
+      <th class="title is-4">Vehicles</th>
+      <th class="title is-4">Favourite Beer</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @people.each do |person| %>
+      <tr>
+        <td><%= person.name %></td>
+        <td><%= person.birth_year %></td>
+        <td><%= person.homeworld %></td>
+        <td> <% unless person.vehicles.first.nil? %>
+            <%= person.vehicles.count %>
+          <% end %></td>
+        <td><%= person.beer.brand %></td>
+        <td><%= link_to 'Show', person %></td>
+        <!-- <td><%= link_to 'Edit', edit_person_path(person) %></td>
+        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <h5><%= link_to 'New Person', new_person_path %></h5>
