@@ -37,6 +37,14 @@ def vehicle_name_list(vehicles)
   vehicle_names.join(', ')
 end
 
+count = 30
+
+Faker::Beer.unique.clear
+
+count.times do
+  Beer.create(brand: Faker::Beer.unique.brand)
+end
+
 count = 1..9
 require 'pp'
 count.each do |pagenumber|
@@ -44,12 +52,6 @@ count.each do |pagenumber|
   char_id = swapi_fetch("https://swapi.co/api/people/?page=#{pagenumber}")['results']
 
   #  pp char_id
-
-  count = 37
-
-  count.times do
-    beer = Beer.create(Faker::Beer.brand.unique)
-  end
 
   char_id.each do |character|
     person = swapi_fetch(character['url'])
@@ -62,8 +64,11 @@ count.each do |pagenumber|
 
     unless person.empty?
       p = h.people.create(name: person['name'], birth_year: person['birth_year'], homeworld: homeworld['name'])
-      b = beer.rand
-      p.beer = b
+
+      offset = rand(Beer.count)
+      rand_record = Beer.offset(offset).first
+      p.beer = rand_record
+      p.save
 
       unless vehicles.empty?
         vehicles.each do |vehicle|

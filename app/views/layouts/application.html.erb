@@ -1,15 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Starwarsproject</title>
+    <title>Star wars Database</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
   </head>
 
   <body>
+  <header>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="https://swapi.co">
+          <%= image_tag("starwarslogo.png", :alt => "logo") %>
+        </a>
+      </div>
+      <div id="People" class="navbar-menu">
+        <div class="navbar-start">
+          <a class="navbar-item">
+           <%= link_to("People", root_path) %>
+          </a>
+
+          <a class="navbar-item">
+            <%= link_to("Planets", planets_path) %>
+          </a>
+          <a class="navbar-item">
+            <%= link_to("Vehicles", vehicles_path) %>
+          </a>
+          <a class="navbar-item">
+            <%= link_to("Beers", beers_path) %>
+          </a>
+
+          <div class="navbar-end">
+          <a class="navbar-item">
+            <%= link_to("About", "/pages/about") %>
+          </a>
+          </div>
+    </nav>
+  </header>
+  <section class="section">
+    <div class="container">
     <%= yield %>
   </body>
 </html>
