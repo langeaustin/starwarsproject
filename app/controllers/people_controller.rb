@@ -14,7 +14,7 @@ class PeopleController < ApplicationController
 
   # GET /search/>search_termuse+search
   def search
-    @people = Person.where("name LIKE ?", "%#{params[:search_term]}")
+    @people = Person.where("name LIKE ?", "%#{params[:search_term]}%")
   end
 
   # GET /people/new
