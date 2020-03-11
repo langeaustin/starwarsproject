@@ -16,7 +16,7 @@
   <header>
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <a class="navbar-item" href="https://swapi.co">
+        <a class="navbar-item" href="people">
           <%= image_tag("starwarslogo.png", :alt => "logo") %>
         </a>
       </div>
@@ -41,6 +41,8 @@
             <%= link_to("About", "/pages/about") %>
           </a>
           </div>
+        </div>
+      </div>
     </nav>
   </header>
   <%= render partial: 'people/search' %>
